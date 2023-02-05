@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UrlController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>SEO URL checker response! ✅</h1>
+
+    <div class="url">
+        Checked url: {{ url }}<br><br>
+    </div>
+
+    {% if response.chain %}
+        <div class="response-chain">
+            Redirect chain:
+            <ul>
+                {% for key, value in response.chain %}
+                    <li>{{value }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    {% if response.counter %}
+        <div class="response-code">
+            Redirect count: {{ response.counter }} <br><br>
+        </div>
+    {% endif %}
+
+    <div class="keywords">
+        <div>Found keywords:</div>
+        <ul>
+            {% if response.keywords %}
+                {% for keyword in response.keywords %}
+                    <li>{{ keyword }}</li>
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+
+</div>
+{% endblock %}
