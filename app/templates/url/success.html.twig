@@ -9,15 +9,18 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>SEO URL checker response! ✅</h1>
+    <h1 class="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900 dark:text-white">SEO URL checker response! ✅</h1>
 
-    <div class="url">
-        Checked url: {{ url }}<br><br>
+    <div class="url flex justify-start items-start">
+        <div class="mb-4 text-md font-normal text-gray-500 lg:text-xl dark:text-gray-400 mr-3">Checked url:</div>
+        <div class="text-md font-normal text-white">
+            <a class="underline" href="{{ url }}">{{ url }}</a>
+        </div>
     </div>
 
     {% if response.chain %}
-        <div class="response-chain">
-            Redirect chain:
+        <div class="response-chain mb-4">
+            <div class="text-md font-normal text-gray-500 lg:text-xl dark:text-gray-400 mr-3">Redirect chain:</div>
             <ul>
                 {% for key, value in response.chain %}
                     <li>{{value }}</li>
@@ -27,14 +30,15 @@
     {% endif %}
 
     {% if response.counter %}
-        <div class="response-code">
-            Redirect count: {{ response.counter }} <br><br>
+        <div class="response-code mb-4">
+            <div class="text-md font-normal text-gray-500 lg:text-xl dark:text-gray-400 mr-3">Redirect count: </div>
+            {{ response.counter }}
         </div>
     {% endif %}
 
     {% if response.keywords %}
         <div class="keywords">
-            <div>Found keywords:</div>
+            <div class="text-md font-normal text-gray-500 lg:text-xl dark:text-gray-400 mr-3">Found keywords:</div>
             <ul>
                 {% for keyword in response.keywords %}
                     <li>{{ keyword }}</li>

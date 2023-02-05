@@ -69,7 +69,7 @@ class UrlController extends AbstractController
 
             foreach ($headers as $value) {
                 if (substr(strtolower($value), 0, 9) == "location:") {
-                    $chain[] = $response['http_code'] . ' - ' . $value;
+                    $chain[] = $response['http_code'] . ' → ' . $value;
                     $counter++;
 
                     $this->checkUrl(trim(substr($value, 9, strlen($value))), 8, $counter);
