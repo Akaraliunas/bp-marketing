@@ -49,10 +49,18 @@ class UrlController extends AbstractController
         ]);
     }
 
+    /**
+     * Checks url for keywords and counts redirects
+     *
+     * @param string $url
+     * @param string $keywords
+     * @param integer $counter
+     * @return array
+     */
     public function checkUrl($url, $keywords = '', $counter = 0)
     {
-        error_reporting(0);
         $foundKeywords = [];
+        $chain = [];
 
         $response = $this->formRequest($url);
 
@@ -86,13 +94,20 @@ class UrlController extends AbstractController
         ];
     }
 
+    /**
+     * Forms a request for given url
+     *
+     * @param string $url
+     * @param integer $timeout
+     * @return mixed
+     */
     public function formRequest($url, $timeout = 5)
     {
-        $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0';
-
-        $cookie = tempnam("/tmp", "CURLCOOKIE");
+        $userAgent = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:18.0) Gecko/20100101 Firefox/18.0';
+        $cookie = tempnam("", "CURLCOOKIE");
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_USERAGENT, $ua);
+
+        curl_setopt($curl, CURLOPT_USERAGENT, $userAgent);
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_COOKIEJAR, $cookie);
         curl_setopt($curl, CURLOPT_ENCODING, "");
@@ -103,7 +118,6 @@ class UrlController extends AbstractController
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 2);
         $content = curl_exec($curl);
-
         curl_close($curl);
 
         return curl_getinfo($curl);

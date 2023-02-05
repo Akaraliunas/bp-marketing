@@ -32,16 +32,16 @@
         </div>
     {% endif %}
 
-    <div class="keywords">
-        <div>Found keywords:</div>
-        <ul>
-            {% if response.keywords %}
+    {% if response.keywords %}
+        <div class="keywords">
+            <div>Found keywords:</div>
+            <ul>
                 {% for keyword in response.keywords %}
                     <li>{{ keyword }}</li>
                 {% endfor %}
-            {% endif %}
-        </ul>
-    </div>
+            </ul>
+        </div>
+    {% endif %}
 
 </div>
 {% endblock %}
